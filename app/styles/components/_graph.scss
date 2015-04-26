@@ -1,0 +1,66 @@
+.graph {
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+
+	.oscillator-item {
+		$size: 140px;
+		background: url(/images/ocelot.png) center center no-repeat;
+		height: $size;
+		width: $size;
+
+		position: absolute;
+		top: calc(50% - #{$size/2});
+		left: calc(50% - #{$size/2});
+	}
+
+	.graph-inner {
+		$width: 2000px;
+		height: 100%;
+		width: $width;
+
+		position: absolute;
+		top: 0;
+		left: calc(50% - #{$width/2});
+	}
+
+	.axes {
+		$offset: 20px;
+
+		position: absolute;
+		top: $offset;
+		right: $offset;
+		bottom: $offset;
+		left: $offset;
+
+		&::before, &::after {
+			background: $color-background-dark;
+			content: '';
+			position: absolute;
+		}
+
+		&::before {
+			// Y
+			width: 1px;
+			top: 0;
+			bottom: 0;
+			left: 50%;
+		}
+
+		&::after {
+			// X
+			$gridlines: 150px;
+			height: 1px;
+			top: 50%;
+			left: 0;
+			right: 0;
+
+			$shadow: null;
+			@for $i from -5 through 5 {
+				$shadow: append($shadow, 0 $gridlines * $i rgba($color-background-dark, 0.3), 'comma');
+			}
+
+			box-shadow: $shadow;
+		}
+	}
+}

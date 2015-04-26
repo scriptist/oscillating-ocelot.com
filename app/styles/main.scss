@@ -1,32 +1,23 @@
 // bower:scss
 // endbower
 
+$color-background: #E7E8D1;
+$color-background-dark: #D3CEAA;
+$color-primary: #8E001C;
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }
 
 html {
+	background: $color-background;
 	font-family: sans-serif;
+}
+
+html, body {
+	margin: 0;
 }
 
 @import "mixins";
 @import "typography";
 @import "components";
-
-
-.hero-unit {
-	background-color: #eee;
-	border-radius: 5px;
-	font-size: 1.2em;
-	line-height: 1.5;
-	margin: 50px auto 0 auto;
-	max-width: 100%;
-	padding: 60px;
-	width: 500px;
-
-	h1 {
-		font-size: 60px;
-		line-height: 1;
-		letter-spacing: -1px;
-	}
-}
