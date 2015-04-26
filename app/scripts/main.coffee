@@ -7,17 +7,26 @@ requestAnimationFrame = do ->
 
 
 class Oscillator
-	itemWidth: 140
-	sinWidth: 4
-	speed: 2
 	constructor: (@parent) ->
-		@start = @time()
+		@itemWidth = 140
+		@sinWidth  = 4
+		@speed     = 2
+
+		@start     = @time()
 		@sideCount = (@parent.offsetWidth - @itemWidth) / 2 // @itemWidth
 		@build()
 		@render()
 
 	time: ->
 		return (new Date()).getTime()
+
+	setSinWidth: (val) ->
+		@sinWidth = parseFloat val || 4
+		@start = @time()
+
+	setSpeed: (val) ->
+		@speed = parseFloat val || 2
+		@start = @time()
 
 	build: ->
 		@items = []
@@ -41,4 +50,4 @@ class Oscillator
 		requestAnimationFrame @render
 
 parent = document.getElementById 'put-the-ocelots-here'
-parent && new Oscillator parent
+window.oscillator = new Oscillator parent
