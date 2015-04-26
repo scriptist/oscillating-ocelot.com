@@ -17,4 +17,4 @@ if supportsRange
 
 	for input in controls.querySelectorAll 'input'
 		input.addEventListener 'change', onInputChange
-		# input.addEventListener 'input', onInputChange
+		input.addEventListener 'input', onInputChange

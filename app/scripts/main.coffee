@@ -9,7 +9,7 @@ requestAnimationFrame = do ->
 class Oscillator
 	constructor: (@parent) ->
 		@itemWidth = 140
-		@sinWidth  = 4
+		@sinWidth  = 3
 		@speed     = 2
 
 		@start     = @time()
@@ -21,12 +21,20 @@ class Oscillator
 		return (new Date()).getTime()
 
 	setSinWidth: (val) ->
-		@sinWidth = parseFloat val || 4
-		@start = @time()
+		val = parseFloat val || 3
+		ratio = @sinWidth / val
+
+		time = @time()
+		@start = time - (time - @start) / ratio
+
+		@sinWidth = val
+
 
 	setSpeed: (val) ->
-		@speed = parseFloat val || 2
-		@start = @time()
+		val = parseFloat val || 2
+		ratio = @speed / val
+		@start = @start * ratio - @time() * (ratio - 1)
+		@speed = val
 
 	build: ->
 		@items = []
@@ -43,7 +51,7 @@ class Oscillator
 		return item
 
 	render: =>
-		offset = (@time() - @start) / 1000 * @speed;
+		offset = (@time() - @start) * @speed / 1000;
 		for item in @items
 			pos = 30 * Math.sin ((item.i - offset) * Math.PI / @sinWidth)
 			item.elm.style.transform = "translateY(#{pos}vh)";
